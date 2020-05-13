@@ -170,7 +170,9 @@ class App extends Component {
                                     {Math.round(main.temp)}&#186;C
                                 </div>
                                 <div className="real-temp">
-                                    Real Feel: 10&#186;C
+                                    Feels Like:{" "}
+                                    {Math.round(main.feels_like * 10) / 10}{" "}
+                                    &#186;C
                                 </div>
 
                                 <div className="weather">
