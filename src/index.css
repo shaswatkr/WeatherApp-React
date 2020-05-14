@@ -15,8 +15,63 @@ body {
     transition: 0.4s ease-out;
 }
 
-.app.warm {
-    background-image: url(./assets/warm-bg.jpg);
+.app.thunderstorm {
+    background-image: url(./assets/wallpapers/thunderstorm.jpg);
+}
+
+.app.drizzle {
+    background-image: url(./assets/wallpapers/drizzle.jpg);
+}
+
+.app.rain {
+    background-image: url(./assets/wallpapers/rain.jpg);
+}
+
+.app.snow {
+    background-image: url(./assets/wallpapers/snow.jpg);
+}
+
+.app.mist {
+    background-image: url(./assets/wallpapers/mist.jpg);
+}
+
+.app.smoke {
+    background-image: url(./assets/wallpapers/smoke.jpg);
+}
+
+.app.haze {
+    background-image: url(./assets/wallpapers/haze.jpg);
+}
+
+.app.dust {
+    background-image: url(./assets/wallpapers/dust.jpg);
+}
+
+.app.fog {
+    background-image: url(./assets/wallpapers/fog.jpg);
+}
+.app.sand {
+    background-image: url(./assets/wallpapers/sand.jpg);
+}
+
+.app.ash {
+    background-image: url(./assets/wallpapers/dust.jpg);
+}
+
+.app.squall {
+    background-image: url(./assets/wallpapers/squal.jpg);
+}
+
+.app.tornado {
+    background-image: url(./assets/wallpapers/tornado.jpg);
+}
+
+.app.clear {
+    background-image: url(./assets/wallpapers/clear.jpg);
+}
+
+.app.clouds {
+    background-image: url(./assets/wallpapers/clouds.jpg);
 }
 
 main {

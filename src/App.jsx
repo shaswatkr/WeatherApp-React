@@ -27,6 +27,13 @@ class App extends Component {
             });
     }
 
+    backgroundWallpaper = () => {
+        const { main } = this.state.weather.weather[0];
+        let classes = "app " + main.toLowerCase();
+
+        return classes;
+    };
+
     queryModification = (event) => {
         this.setState({ query: event.target.value });
     };
@@ -76,7 +83,7 @@ class App extends Component {
         if (typeof main != "undefined") {
             if (this.state.error === false) {
                 return (
-                    <div className={main.temp > 16 ? "app warm" : "app"}>
+                    <div className={this.backgroundWallpaper()}>
                         <main>
                             <SearchBox
                                 query={this.state.query}
