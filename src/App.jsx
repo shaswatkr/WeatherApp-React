@@ -1,5 +1,13 @@
 import React, { Component } from "react";
 import Loading from "./components/loading";
+import SearchBox from "./components/searchBox";
+import CityAndDate from "./components/cityAndDate";
+import TempBox from "./components/weatherComponent.jsx/tempBox";
+import WeatherCondition from "./components/weatherComponent.jsx/weatherCondition";
+import DetailBoxOne from "./components/weatherComponent.jsx/weatherDetailsComponent/detailBoxOne";
+import DetailBoxTwo from "./components/weatherComponent.jsx/weatherDetailsComponent/detailBoxTwo";
+import NoCityFound from "./components/weatherComponent.jsx/noCityFound";
+import SunBox from "./components/weatherComponent.jsx/sunBox";
 
 const api = {
     key: "318a00c0b0c6e988d9074a4f5c463dc9",
@@ -18,76 +26,8 @@ class App extends Component {
             });
     }
 
-    datebuilder = (d) => {
-        let months = [
-            "January",
-            "February",
-            "March",
-            "April",
-            "May",
-            "June",
-            "July",
-            "August",
-            "September",
-            "October",
-            "November",
-            "December",
-        ];
-        let days = [
-            "Sunday",
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thrusday",
-            "Friday",
-            "Saturday",
-        ];
-
-        let day = days[d.getDay()];
-        let date = d.getDate();
-        let month = months[d.getMonth()];
-        let year = d.getFullYear();
-
-        return `${day}, ${date} ${month} ${year}`;
-    };
-
-    degToCompass = (deg) => {
-        var val = Math.floor(deg / 22.5 + 0.5);
-        var dir = [
-            "N",
-            "NNE",
-            "NE",
-            "ENE",
-            "E",
-            "ESE",
-            "SE",
-            "SSE",
-            "S",
-            "SSW",
-            "SW",
-            "WSW",
-            "W",
-            "WNW",
-            "NW",
-            "NNW",
-        ];
-        return dir[val % 16];
-    };
-
-    unixToDate = (time) => {
-        let date = new Date(time * 1000);
-
-        let meridian = "AM";
-        let hours = date.getHours();
-        if (hours > 12) {
-            hours = hours - 12;
-            meridian = "PM";
-        }
-        let minutes = "0" + date.getMinutes();
-
-        let formattedTime = hours + ":" + minutes.substr(-2) + " " + meridian;
-
-        return formattedTime;
+    queryModification = (event) => {
+        this.setState({ query: event.target.value });
     };
 
     search = (event) => {
@@ -137,161 +77,45 @@ class App extends Component {
                 return (
                     <div className={main.temp > 16 ? "app warm" : "app"}>
                         <main>
-                            {/* -------------------- Search Box ----------------------- */}
-                            <div className="search-box">
-                                <input
-                                    type="text"
-                                    className="search-bar"
-                                    placeholder="Search.."
-                                    onChange={(e) =>
-                                        this.setState({ query: e.target.value })
-                                    }
-                                    value={this.state.query}
-                                    onKeyPress={this.search}
-                                />
-                            </div>
-                            {/* ---------------------  END Search Box --------------------- */}
+                            <SearchBox
+                                query={this.state.query}
+                                search={this.search}
+                                queryModification={this.queryModification}
+                            />
 
-                            <div className="location-box">
-                                {/* ------------------------ Location  --------------------- */}
-                                <div className="location">
-                                    {name}, {sys.country}
-                                </div>
-
-                                {/* ------------------------- Date ------------------------- */}
-                                <div className="date">
-                                    {this.datebuilder(new Date())}
-                                </div>
-                            </div>
+                            <CityAndDate city={name} country={sys.country} />
 
                             {/* ------------------------- Weather Data ------------------------- */}
                             <div className="weather-box">
-                                <div className="temp">
-                                    {Math.round(main.temp)}&#186;C
-                                </div>
-                                <div className="real-temp">
-                                    Feels Like:{" "}
-                                    {Math.round(main.feels_like * 10) / 10}{" "}
-                                    &#186;C
-                                </div>
+                                <TempBox
+                                    temp={main.temp}
+                                    feelsLike={main.feels_like}
+                                />
 
-                                <div className="weather">
-                                    {" "}
-                                    {weather[0].main}{" "}
-                                </div>
+                                <WeatherCondition condition={weather[0].main} />
 
                                 <div className="row">
-                                    {/*-------------------- First details -------------------------- */}
-                                    <div className="details col text-white">
-                                        <div className="row">
-                                            <div className="col-7 text-right">
-                                                Temp Max:
-                                            </div>
-                                            <div className="col text-left my-auto">
-                                                {main.temp_max} &#186;C
-                                            </div>
-                                        </div>
+                                    <DetailBoxOne
+                                        main={main}
+                                        visibility={visibility}
+                                    />
 
-                                        <div className="row">
-                                            <div className="col-7 text-right">
-                                                Temp Min:
-                                            </div>
-                                            <div className="col text-left my-auto">
-                                                {main.temp_min} &#186;C
-                                            </div>
-                                        </div>
-
-                                        <div className="row">
-                                            <div className="col-7 text-right">
-                                                Pressure:
-                                            </div>
-                                            <div className="col text-left my-auto">
-                                                {main.pressure} hPA
-                                            </div>
-                                        </div>
-
-                                        <div className="row">
-                                            <div className="col-7 text-right">
-                                                Humidity:
-                                            </div>
-                                            <div className="col text-left my-auto">
-                                                {main.humidity} %
-                                            </div>
-                                        </div>
-
-                                        <div className="row">
-                                            <div className="col-7 text-right">
-                                                Visibility:
-                                            </div>
-                                            <div className="col text-left my-auto">
-                                                {Math.round(visibility / 10) /
-                                                    100}{" "}
-                                                km
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    {/*-------------------- Second details -------------------------- */}
-                                    <div className="details col text-white">
-                                        <div className="row">
-                                            <div className="col-7 text-right">
-                                                Sun Rise:
-                                            </div>
-                                            <div className="col text-left my-auto">
-                                                {this.unixToDate(sys.sunrise)}
-                                            </div>
-                                        </div>
-
-                                        <div className="row">
-                                            <div className="col-7 text-right">
-                                                Sun Set:
-                                            </div>
-                                            <div className="col text-left my-auto">
-                                                {this.unixToDate(sys.sunset)}
-                                            </div>
-                                        </div>
-
-                                        <div className="row">
-                                            <div className="col-7 text-right">
-                                                Wind:
-                                            </div>
-                                            <div className="col text-left my-auto">
-                                                {this.degToCompass(wind.deg)}
-                                            </div>
-                                        </div>
-
-                                        <div className="row">
-                                            <div className="col-7 text-right">
-                                                Wind Speed:
-                                            </div>
-                                            <div className="col text-left my-auto">
-                                                {wind.speed} m/s
-                                            </div>
-                                        </div>
-
-                                        <div className="row">
-                                            <div className="col-7 text-right">
-                                                Cloud Cover:
-                                            </div>
-                                            <div className="col text-left my-auto">
-                                                {clouds.all} %
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <DetailBoxTwo
+                                        main={main}
+                                        sys={sys}
+                                        wind={wind}
+                                        clouds={clouds.all}
+                                    />
                                 </div>
+
+                                <SunBox sys={sys} />
                             </div>
+                            {/* ------------------------- END Weather Data ------------------------- */}
                         </main>
                     </div>
                 );
             } else {
-                return (
-                    <div className="jumbotron">
-                        <a className="display-5" href="/">
-                            No City Found with the following name,
-                            <span className="text-danger"> GO BACK!! </span>
-                        </a>
-                    </div>
-                );
+                return <NoCityFound />;
             }
         } else {
             return (

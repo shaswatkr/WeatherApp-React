@@ -82,7 +82,7 @@ main {
     margin: 30px auto;
     background-color: rgba(255, 255, 255, 0.2);
     border-radius: 16px;
-    padding: 15px 25px;
+    padding: 5px 25px;
     color: white;
     font-size: 80px;
     font-weight: 700;
@@ -110,18 +110,22 @@ main {
 }
 
 .weather-box .details {
-    position: relative;
-    display: inline-block;
-    margin: 30px 10px;
+    margin: 10px;
     background-color: rgba(255, 255, 255, 0.2);
     border-radius: 16px;
-    padding: 15px 5px;
+    padding: 5px;
     color: white;
-    font-size: 16px;
-    font-weight: 500;
+    font-size: 18px;
+    font-weight: 00;
     text-shadow: 3px 4px rgba(50, 50, 70, 0.5);
     box-shadow: 3px 6px rgba(0, 0, 0, 0.2);
 }
+
+.weather-box .details .sun {
+    padding-left: 75px !important;
+}
+
+/* ---------------------- Loading page css -------------------------------- */
 
 .modal-content {
     border-radius: 0px;
