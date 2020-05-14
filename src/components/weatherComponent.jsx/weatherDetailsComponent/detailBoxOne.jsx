@@ -1,7 +1,7 @@
 import React from "react";
 
 const DetailBoxOne = ({ main, visibility }) => {
-    const { temp_max, pressure, humidity } = main;
+    const { temp_max, pressure } = main;
 
     return (
         <div className="details col text-white">
@@ -21,16 +21,6 @@ const DetailBoxOne = ({ main, visibility }) => {
                 </div>
                 <div className="col-12 mx-auto col-sm-6 text-sm-left">
                     {pressure} hPA
-                </div>
-            </div>
-            <hr />
-
-            <div className="row">
-                <div className="col-12 mx-auto col-sm-6 text-sm-right">
-                    Humidity:
-                </div>
-                <div className="col-12 mx-auto col-sm-6 text-sm-left">
-                    {humidity} %
                 </div>
             </div>
             <hr />

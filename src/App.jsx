@@ -3,11 +3,12 @@ import Loading from "./components/loading";
 import SearchBox from "./components/searchBox";
 import CityAndDate from "./components/cityAndDate";
 import TempBox from "./components/weatherComponent.jsx/tempBox";
-import WeatherCondition from "./components/weatherComponent.jsx/weatherCondition";
+import WeatherDescription from "./components/weatherComponent.jsx/weatherDescription";
 import DetailBoxOne from "./components/weatherComponent.jsx/weatherDetailsComponent/detailBoxOne";
 import DetailBoxTwo from "./components/weatherComponent.jsx/weatherDetailsComponent/detailBoxTwo";
 import NoCityFound from "./components/weatherComponent.jsx/noCityFound";
 import SunBox from "./components/weatherComponent.jsx/sunBox";
+import WindCloudBox from "./components/weatherComponent.jsx/windCloudBox";
 
 const api = {
     key: "318a00c0b0c6e988d9074a4f5c463dc9",
@@ -92,7 +93,9 @@ class App extends Component {
                                     feelsLike={main.feels_like}
                                 />
 
-                                <WeatherCondition condition={weather[0].main} />
+                                <WeatherDescription
+                                    description={weather[0].description}
+                                />
 
                                 <div className="row">
                                     <DetailBoxOne
@@ -103,12 +106,18 @@ class App extends Component {
                                     <DetailBoxTwo
                                         main={main}
                                         sys={sys}
-                                        wind={wind}
-                                        clouds={clouds.all}
+                                        condition={weather[0].main}
                                     />
                                 </div>
 
                                 <SunBox sys={sys} />
+
+                                <div className="row">
+                                    <WindCloudBox
+                                        wind={wind}
+                                        clouds={clouds.all}
+                                    />
+                                </div>
                             </div>
                             {/* ------------------------- END Weather Data ------------------------- */}
                         </main>

@@ -1,32 +1,8 @@
 import React, { Component } from "react";
 
 class DetailBoxTwo extends Component {
-    degToCompass = (deg) => {
-        var val = Math.floor(deg / 22.5 + 0.5);
-        var dir = [
-            "N",
-            "NNE",
-            "NE",
-            "ENE",
-            "E",
-            "ESE",
-            "SE",
-            "SSE",
-            "S",
-            "SSW",
-            "SW",
-            "WSW",
-            "W",
-            "WNW",
-            "NW",
-            "NNW",
-        ];
-        return dir[val % 16];
-    };
-
     render() {
-        const { main, wind, clouds } = this.props;
-        const { deg, speed } = wind;
+        const { main, condition } = this.props;
 
         return (
             <div className="details col text-white">
@@ -42,30 +18,20 @@ class DetailBoxTwo extends Component {
 
                 <div className="row">
                     <div className="col-12 mx-auto col-sm-6 text-sm-right">
-                        Wind:
+                        Humidity:
                     </div>
                     <div className="col-12 mx-auto col-sm-6 text-sm-left">
-                        {this.degToCompass(deg)}
+                        {main.humidity} %
                     </div>
                 </div>
                 <hr />
 
                 <div className="row">
                     <div className="col-12 mx-auto col-sm-6 text-sm-right">
-                        Wind Speed:
+                        Weather Condition:
                     </div>
                     <div className="col-12 mx-auto col-sm-6 text-sm-left">
-                        {speed} m/s
-                    </div>
-                </div>
-                <hr />
-
-                <div className="row">
-                    <div className="col-12 mx-auto col-sm-6 text-sm-right">
-                        Cloud Cover:
-                    </div>
-                    <div className="col-12 mx-auto col-sm-6 text-sm-left">
-                        {clouds} %
+                        {condition}
                     </div>
                 </div>
             </div>

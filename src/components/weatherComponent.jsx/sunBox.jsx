@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import Sunrise from "../../assets/icons/sunup.png";
-import Sunset from "../../assets/icons/sundown.png";
+import Sunrise from "../../assets/icons/sun/sunup.png";
+import Sunset from "../../assets/icons/sun/sundown.png";
 
 class SunBox extends Component {
     unixToDate = (time) => {
