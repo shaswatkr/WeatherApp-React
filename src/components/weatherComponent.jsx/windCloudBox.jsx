@@ -87,7 +87,7 @@ class WindCloudBox extends Component {
                         }}
                         className="row"
                     >
-                        {clouds} %
+                        {clouds}%
                     </div>
                 </div>
             </>
